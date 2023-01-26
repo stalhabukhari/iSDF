@@ -499,6 +499,15 @@ class Trainer():
             self.up = np.array([0., 0., 1.])
             ims_file = self.ims_file
             camera_matrix = np.array([[self.fx, 0.0, self.cx], [0.0, self.fy, self.cy], [0.0, 0.0, 1.0]])
+        elif self.dataset_format == "igibson_test":
+            dataset_class = dataset.IGibsonDataset
+            col_ext = ".jpg"
+            self.up = np.array([0., 0., 1.])
+            ims_file = self.ims_file
+            noisy_depth = self.noisy_depth
+            camera_matrix = np.array([[self.fx, 0.0, self.cx], [0.0, self.fy, self.cy], [0.0, 0.0, 1.0]])
+        else:
+            raise Exception(f"Unknown dataset format: {self.dataset_format}")
 
         self.scene_dataset = dataset_class(
             ims_file,
